@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Commande confirmée — ShopDjango{% endblock %}
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 text-center">
+      <div class="card p-5">
+        <div class="text-success mb-4"><i class="fas fa-check-circle fa-5x"></i></div>
+        <h2 class="fw-bold">Commande confirmée !</h2>
+        <p class="text-muted">Commande <strong>#{{ order.id }}</strong> passée avec succès.</p>
+        <p>Un email de confirmation a été envoyé à <strong>{{ order.email }}</strong></p>
+        <div class="mt-4 d-flex gap-3 justify-content-center">
+          <a href="{% url 'orders:order_detail' order.id %}" class="btn btn-primary">Voir ma commande</a>
+          <a href="{% url 'shop:product_list' %}" class="btn btn-outline-secondary">Continuer les achats</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

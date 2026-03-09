@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}Commander — ShopDjango{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <h2 class="fw-bold mb-4"><i class="fas fa-clipboard-list me-2"></i>Passer commande</h2>
+  <div class="row g-4">
+    <div class="col-lg-7">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="fw-bold mb-4">Informations de livraison</h5>
+          <form method="POST">
+            {% csrf_token %}
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Prénom *</label>
+                {{ form.first_name }}
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Nom *</label>
+                {{ form.last_name }}
+              </div>
+              <div class="col-12">
+                <label class="form-label">Email *</label>
+                {{ form.email }}
+              </div>
+              <div class="col-12">
+                <label class="form-label">Adresse *</label>
+                {{ form.address }}
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Code postal *</label>
+                {{ form.postal_code }}
+              </div>
+              <div class="col-md-8">
+                <label class="form-label">Ville *</label>
+                {{ form.city }}
+              </div>
+            </div>
+            {% if form.errors %}
+            <div class="alert alert-danger mt-3">Veuillez corriger les erreurs ci-dessus.</div>
+            {% endif %}
+            <button type="submit" class="btn btn-primary btn-lg w-100 mt-4">
+              <i class="fas fa-check me-2"></i>Confirmer la commande
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-5">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="fw-bold mb-4">Votre commande</h5>
+          {% for item in cart %}
+          <div class="d-flex justify-content-between mb-3 align-items-center">
+            <div>
+              <span class="fw-semibold">{{ item.product.name }}</span>
+              <span class="text-muted small"> x{{ item.quantity }}</span>
+            </div>
+            <span class="fw-bold">{{ item.total_price }} €</span>
+          </div>
+          {% endfor %}
+          <hr>
+          <div class="d-flex justify-content-between fw-bold fs-5">
+            <span>Total</span>
+            <span class="text-success">{{ cart.get_total_price }} €</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

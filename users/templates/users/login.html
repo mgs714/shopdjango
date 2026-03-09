@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Connexion — ShopDjango{% endblock %}
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-4">
+      <div class="card shadow-lg">
+        <div class="card-body p-5">
+          <h3 class="fw-bold text-center mb-4">Connexion</h3>
+          <form method="POST">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="mb-3">
+              <label class="form-label fw-semibold">{{ field.label }}</label>
+              {{ field }}
+              {% if field.errors %}<div class="text-danger small mt-1">{{ field.errors.0 }}</div>{% endif %}
+            </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary w-100 btn-lg mt-2">Se connecter</button>
+          </form>
+          <p class="text-center text-muted mt-3 mb-0">Pas encore de compte ? <a href="{% url 'users:register' %}">S'inscrire</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
