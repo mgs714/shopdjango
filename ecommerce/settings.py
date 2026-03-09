@@ -80,3 +80,10 @@ import dj_database_url
 DATABASE_URL = os.environ.get('DATABASE_URL')
 if DATABASE_URL:
     DATABASES['default'] = dj_database_url.config(default=DATABASE_URL)
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.railway.app',
+    'https://web-production-cbcd.up.railway.app',
+]
+CSRF_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = False
